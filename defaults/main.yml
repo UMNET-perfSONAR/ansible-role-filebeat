@@ -1,0 +1,16 @@
+---
+# defaults file for ansible-filebeat-role
+
+filebeat_inputs:
+  - type: log
+    paths:
+      - "/var/log/pssid.log"
+
+filebeat_output_logstash_enabled: true
+filebeat_output_logstash_hosts:
+  - "pssid-metrics.miserver.it.umich.edu:9400"
+
+filebeat_enable_logging: true
+filebeat_log_level: debug
+filebeat_log_dir: /var/log/filebeat
+filebeat_log_filename: filebeat.log

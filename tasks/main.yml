@@ -1,12 +1,4 @@
 ---
-- name: Install apt-transport-https and gnupg
-  apt:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - apt-transport-https
-    - gnupg
-
 - name: Add Elastic GPG key
   apt_key:
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -19,6 +11,19 @@
     state: present
     filename: 'elastic-7.x'
     update_cache: true
+
+- name: Install apt-transport-https and gnupg
+  apt: # might change to package instead of apt for OS agnostic
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apt-transport-https
+    - gnupg
+
+- name: Ensure Filebeat is installed
+  ansible.builtin.apt:
+    name: filebeat
+    state: present
 
 - name: Copy Filebeat configuration
   ansible.builtin.template:

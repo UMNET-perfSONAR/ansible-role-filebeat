@@ -20,8 +20,8 @@ output.logstash:
     to_files: true
     json: true
     files:
-      path: '/var/log/filebeat'
-      name: 'filebeat.log'
+      path: {{ filebeat_log_dir }}
+      name: {{ filebeat_log_filename }}
       keepfiles: 7
       permissions: 0644
 {% endif %}

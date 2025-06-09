@@ -12,18 +12,14 @@
     filename: 'elastic-7.x'
     update_cache: true
 
-- name: Install apt-transport-https and gnupg
-  apt: # might change to package instead of apt for OS agnostic
+- name: Install apt-transport-https and gnupg and Filebeat
+  package: # might change to package instead of apt for OS agnostic
     name: "{{ item }}"
     state: present
   loop:
     - apt-transport-https
     - gnupg
-
-- name: Ensure Filebeat is installed
-  ansible.builtin.apt:
-    name: filebeat
-    state: present
+    - filebeat
 
 - name: Copy Filebeat configuration
   ansible.builtin.template:
